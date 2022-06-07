@@ -3,7 +3,7 @@ async function searchUser() {
     const msg = document.getElementById("msg")
     const search = document.getElementById('searchBox')
     const username = document.getElementById('username')
-
+    msg.textContent = ''
     let request = await MakeAPIRequest(UserQ(search.value))
     let result = request["data"]["user"][0]
 
