@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GraphQL</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="js/search.js"></script>
+    <script type="text/javascript" src="js/request.js"></script>
+    <script type="text/javascript" src="js/queries.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.0.0/js/anychart-base.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="search">
+            <input id="searchBox" type="text" placeholder="Search.." value="hanno_remmelg" name="search">
+            <button onclick="searchUser()">Search</button>
+            <div id="msg"></div>
+        </div>
+        <div class="container-inner">
+            <div class="xp">
+                <div class="username"><h3>Username</h3>
+                    <div id="username"></div>
+                </div>
+                <div class="go-piscine"><h3>go-piscine</h3>
+                    <div id="go-piscine-xp"></div>
+                </div>
+                <div class="js-piscine"><h3>js-piscine</h3>
+                    <div id="js-piscine-xp"></div>
+                </div>
+                <div class="div-01"><h3>div-01</h3>
+                    <div id="div-01-xp"></div>
+                </div>
+
+            </div>
+        </div>
+        <div id="audit-ratio">
+        </div>
+        <div id="header-user-audits">User audits </div>
+        <div class="user-audits">
+                <div>
+                    <table id="user-audits-table">
+                        <tr>
+                            <th>Task</th>
+                            <th>Date</th>
+                            <th>XP</th>
+                        </tr>
+                    </table>
+                </div>
+        </div>
+        <div id="tasks">
+        </div>
+    </div>
+</body>
+<script>searchUser()</script>
+</html>

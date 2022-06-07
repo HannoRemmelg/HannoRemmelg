@@ -1,0 +1,69 @@
+div {
+    font-family: "Verdana, Helvetica, Arial, sans-serif", sans-serif;
+    color: #7c868e;
+    font-size: 16;
+}
+
+#msg{
+    color: #950202;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 50px;
+    gap: 30px;
+}
+.search {
+    display: flex;
+    justify-content: center;
+
+}
+.container-inner {
+    flex-direction: row;
+    justify-content: center;
+}
+
+.xp {
+    display: flex;
+    flex-direction: row;
+    padding: 30px;
+    gap: 20px;
+    justify-content: center;
+    box-shadow: 7px 6px 5px 0px rgba(0,0,0,0.05);
+
+}
+
+#tasks {
+    height: 800px;
+    box-shadow: 7px 6px 5px 0px rgba(0,0,0,0.05);
+
+}
+#header-user-audits {
+    flex-direction: row;
+    justify-content: center;
+    display: flex;
+}
+.user-audits {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    overflow-y:scroll;
+    height:300px;
+    box-shadow: 7px 6px 5px 0px rgba(0,0,0,0.05);
+}
+td {
+    width: 200px;
+    text-align: center;
+}
+#audit-ratio {
+    box-shadow: 7px 6px 5px 0px rgba(0,0,0,0.05);
+}
+
+button {
+    color: white;
+    background: #64b5f6;
+}
