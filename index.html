@@ -12,9 +12,14 @@
 <body>
     <div class="container">
         <div class="search">
-            <input id="searchBox" type="text" placeholder="Search.." value="hanno_remmelg" name="search">
-            <button onclick="searchUser()">Search</button>
-            <div id="msg"></div>
+            <div class="search-wrapper">
+                <input id="searchBox" type="text" placeholder="Search.." value="hanno_remmelg" name="search">
+                <button onclick="searchUser()">Search</button>
+                <div id="msg"></div>
+            </div>
+        </div>
+        <div id="search-results">
+            <div class="holder">jou</div>
         </div>
         <div class="container-inner">
             <div class="xp">
@@ -51,5 +56,7 @@
         </div>
     </div>
 </body>
-<script>searchUser()</script>
+<script>
+    searchUser()
+</script>
 </html>

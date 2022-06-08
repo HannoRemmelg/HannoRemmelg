@@ -7,6 +7,14 @@ function UserQ(username) {
     }`
 }
 
+function searchUserLikeQ(input) {
+    return `{
+      user (where: {login: {_ilike: "%${input}%"}}, limit: 5) {
+        login
+      }
+    }`
+}
+
 function TransactionsQ(userId, type, offset) {
     return `{
       transaction (where:{userId: {_eq: ${userId}}, type: {_eq: "${type}"}}, order_by: {createdAt: asc}, offset:${offset}){

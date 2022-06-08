@@ -1,10 +1,35 @@
 
-async function searchUser() {
+window.onload = (event) => {
+    const searchBox = document.getElementById('searchBox')
+    const searchResults = document.getElementById('search-results')
+
+    searchBox.addEventListener('keyup', async (e) => { //listen for input in the search bar
+        let userData = e.target.value;
+        let result = []
+        searchResults.innerHTML = `<div class="holder">jou</div>`
+        if (userData) {
+            let req = await MakeAPIRequest(searchUserLikeQ(userData))
+            result = req['data']['user'].map(x => x.login)
+            for (const res of result) {
+                searchResults.innerHTML += `<div class="search-result" onclick="searchUser('${res}')">${res}</div>`
+            }
+        } else {
+            searchResults.innerHTML = `<div class="holder">jou</div>`
+        }
+    })
+};
+
+
+async function searchUser(optional) {
     const msg = document.getElementById("msg")
     const search = document.getElementById('searchBox')
     const username = document.getElementById('username')
+    const searchResults = document.getElementById('search-results')
+
     msg.textContent = ''
-    let request = await MakeAPIRequest(UserQ(search.value))
+    searchResults.textContent = ''
+    let toBeSearched = (optional === undefined) ? search.value : optional
+    let request = await MakeAPIRequest(UserQ(toBeSearched))
     let result = request["data"]["user"][0]
 
     if (result === undefined) {
@@ -13,7 +38,7 @@ async function searchUser() {
         return
     }
 
-    username.textContent = search.value
+    username.textContent = toBeSearched
     let transactionsXP = await getTransactions(result, "xp")
     displayXP(transactionsXP)
 

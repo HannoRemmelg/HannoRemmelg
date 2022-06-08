@@ -7,6 +7,25 @@ div {
     color: #950202;
 }
 
+#search-results {
+    flex-direction: row;
+    justify-content: center;
+    display: flex;
+}
+
+.search-result {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.search-result:hover {
+    color: #950202;
+}
+
+.holder {
+    opacity: 0;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -19,8 +38,8 @@ div {
 .search {
     display: flex;
     justify-content: center;
-
 }
+
 .container-inner {
     flex-direction: row;
     justify-content: center;
