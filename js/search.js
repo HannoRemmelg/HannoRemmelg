@@ -1,4 +1,3 @@
-
 window.onload = (event) => {
     const searchBox = document.getElementById('searchBox')
     const searchResults = document.getElementById('search-results')
@@ -72,19 +71,29 @@ function displayXP(transactions) {
     const go = document.getElementById('go-piscine-xp')
     const js = document.getElementById('js-piscine-xp')
     const div = document.getElementById('div-01-xp')
-
     const types = ["piscine-go", "piscine-js", "div-01"]
     let xp = [0,0,0]
     let divXP = {}
     for (const tran of transactions) {
+
         const path = tran['path']
         const name = tran.object.name
 
         if (path.includes(types[0])) {
             xp[0] += tran.amount
-        } else if (path.includes(types[1])) {
-            xp[1] += tran.amount
-        } else if (path.includes(types[2])) {
+        } if (path.includes(types[1])) {
+            if(tran.object.type !== 'piscine') {
+                xp[1] += tran.amount
+            }
+        }
+        if (path.includes(types[2])) {
+            if (tran.object.type !== 'project' && tran.object.type !== 'piscine') {
+                continue
+            }
+            if (tran.amount < 10001 && !(name.includes('ascii') || name.includes('reloaded')|| name.includes('math')|| name.includes('linear') || name.includes('guess'))){
+                continue
+            }
+            // console.log(tran)
             let exists = Object.keys(divXP).includes(name)
             if (exists) {
                 if (tran.amount > divXP[name]) {
@@ -95,7 +104,10 @@ function displayXP(transactions) {
             }
         }
     }
-    xp[2] = Object.values(divXP).reduce((partialSum, a) => partialSum + a, 0)
+    // console.log(divXP);
+    // console.log(count)
+    // console.log(Object.values(divXP).length)
+    xp[2] = Object.values(divXP).reduce((partialSum, a) => partialSum + a, 0) -48000
     go.textContent = Math.round(xp[0]).toString()
     js.textContent = Math.round(xp[1]).toString()
     div.textContent = Math.round(xp[2]).toString()
@@ -135,21 +147,19 @@ function displayAuditsGraph(completed, received) {
     chart.container("audit-ratio");
     chart.draw();
     removeElementsByClass('anychart-credits')
-/*
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('height', `${60}px`);
-    svg.setAttribute('width', `${450}px`);
-    svg.setAttribute('viewBox', `0 0 60 450`);
-
-    const bar = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-    bar.setAttribute('x', 0);
-    bar.setAttribute('y', 500);
-    bar.setAttribute('height', `${0}px`);
-    bar.setAttribute('width', `${500 / data.length}px`);
-    bar.setAttribute('style', 'transition: 0.5s all;');
-    svg.appendChild(bar);
-
- */
+    /*
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('height', `${60}px`);
+        svg.setAttribute('width', `${450}px`);
+        svg.setAttribute('viewBox', `0 0 60 450`);
+        const bar = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        bar.setAttribute('x', 0);
+        bar.setAttribute('y', 500);
+        bar.setAttribute('height', `${0}px`);
+        bar.setAttribute('width', `${500 / data.length}px`);
+        bar.setAttribute('style', 'transition: 0.5s all;');
+        svg.appendChild(bar);
+     */
 }
 
 function displayAuditsTable(completed) {
@@ -195,18 +205,26 @@ function displayTasksGraph(divXP) {
 
 function getCompletedProjects(received) {
     let divXP = {}
-
+    let all = {}
     for (const tran of received) {
         const name = tran.object.name
         let exists = Object.keys(divXP).includes(name)
         if (exists) {
+            all[name] += 1
             if (tran.amount > divXP[name]) {
                 divXP[name] = tran.amount
             }
         } else {
+            all[name] = 1
             divXP[name] = tran.amount
         }
     }
+    Object.entries(all).forEach(([key, value]) => {
+        if (!(value === 3 || value === 5)) {
+            delete divXP[key]
+        }
+    })
+    console.log(all)
     return divXP
 }
 
